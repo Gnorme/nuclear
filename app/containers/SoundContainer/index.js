@@ -32,6 +32,7 @@ class SoundContainer extends React.Component {
   handleLoaded() {
     this.handleAutoRadio();
     this.props.actions.updateStreamLoading(false);
+    console.log('new song');
   }
 
   handleAutoRadio() {
@@ -71,6 +72,14 @@ class SoundContainer extends React.Component {
       this.props.settings.loopAfterQueueEnd
     ) {
       this.nextSong();
+      let currentSong = this.props.queue.queueItems[
+        this.props.queue.currentSong
+      ];
+      let currentHistory = this.props.player.songHistory;
+      this.props.actions.updateLastSong(currentSong);
+      currentHistory.push(currentSong)
+      this.props.actions.updateHistory(currentHistory);
+      console.log(this.props);
     } else {
       this.props.actions.pausePlayback();
     }

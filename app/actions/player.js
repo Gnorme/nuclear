@@ -7,6 +7,8 @@ export const UPDATE_PLAYBACK_PROGRESS = 'UPDATE_PLAYBACK_PROGRESS';
 export const UPDATE_SEEK = 'UPDATE_SEEK';
 export const UPDATE_VOLUME = 'UPDATE_VOLUME';
 export const UPDATE_PLAYBACK_STREAM_LOADING = 'UPDATE_PLAYBACK_STREAM_LOADING';
+export const ASSIGN_LAST_SONG = 'ASSIGN_LAST_SONG';
+export const UPDATE_SONG_HISTORY = 'UPDATE_SONG_HISTORY';
 
 export function startPlayback() {
   sendPlay();
@@ -62,5 +64,19 @@ export function updateStreamLoading(state) {
   return {
     type: UPDATE_PLAYBACK_STREAM_LOADING,
     payload: state
+  };
+}
+
+export function updateLastSong(song) {
+  return {
+    type: ASSIGN_LAST_SONG,
+    payload: song
+  };
+}
+
+export function updateHistory(history){
+  return {
+    type: UPDATE_SONG_HISTORY,
+    payload:history
   };
 }

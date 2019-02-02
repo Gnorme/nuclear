@@ -5,6 +5,7 @@ import BestNewMusicTab from './BestNewMusicTab';
 import ChartsTab from './ChartsTab';
 import GenresTab from './GenresTab';
 import NewsTab from './NewsTab';
+import HistoryTab from './HistoryTab';
 
 class Dashboard extends React.Component {
   panes() {
@@ -50,6 +51,10 @@ class Dashboard extends React.Component {
       {
         menuItem: 'News',
         render: () => <NewsTab news={this.props.dashboardData.news} />
+      },
+      {
+        menuItem: 'History',
+        render: () => <HistoryTab stuff={this.props}/>
       }
     ];
   }

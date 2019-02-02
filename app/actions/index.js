@@ -148,6 +148,8 @@ export function youtubePlaylistSearch (terms) {
     dispatch(youtubePlaylistSearchStart(terms));
     youtube.playlistSearch(terms)
       .then(results => {
+        console.log(results);
+        console.log(terms);
         dispatch(
           youtubePlaylistSearchSuccess(terms, results)
         );

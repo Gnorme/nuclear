@@ -1,0 +1,36 @@
+@import '../../../vars'; 
+.history_container {
+    display: flex;
+    flex-flow: column;
+  }
+  .history_item {
+    border: 1px solid rgba($lightbg, 0.3);
+    padding: 1rem;
+    border-radius: 0.25rem;
+    margin-bottom: 1rem;
+  
+    &:last-child {
+      margin-bottom: 0;
+    }
+  
+    h1 {
+      width: 100%;
+      padding: 0.5rem 1rem 0.5rem 0;
+    }
+  
+    h4 {
+      margin: 1rem 0;
+    }
+    
+    .tags {
+      display: flex;
+      flex-flow: row;
+      justify-content: flex-end;
+    }
+  
+    .tag {
+      padding: 0.25rem 0.5rem;
+      border-radius: 1rem;
+      background-color: rgba(white, 0.5);
+    }
+  }

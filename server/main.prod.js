@@ -29,7 +29,7 @@ function createWindow() {
     ]
   });
 
-  win.setTitle('Nuclear Music Player');
+  win.setTitle('Nuclear Music Playa');
 
   win.loadURL(url.format({
     pathname: path.join(__dirname, 'index.html'),
@@ -60,8 +60,8 @@ function createWindow() {
   ]);
 
   tray = new Tray(icon);
-  tray.setTitle('Nuclear Music Player');
-  tray.setToolTip('Nuclear Music Player');
+  tray.setTitle('Nuclear Music Playa');
+  tray.setToolTip('Nuclear Music Playa');
   tray.setContextMenu(trayMenu);
 
   ipcMain.on('close', () => {

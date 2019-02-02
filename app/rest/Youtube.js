@@ -26,6 +26,8 @@ export function playlistSearch (url) {
   if (isValidURL(url)) {
     return ytlist(url, 'name')
       .then(res => {
+        console.log(url);
+        console.log(res);
         let allTracks = res.data.playlist.map((elt) => {
           let result = getArtistTitle(elt);
           if (result) {

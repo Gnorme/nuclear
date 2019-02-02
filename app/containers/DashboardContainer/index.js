@@ -11,7 +11,7 @@ import Dashboard from '../../components/Dashboard';
 
 class DashboardContainer extends React.Component {
   render() {
-    let { actions, dashboard, history, musicSources } = this.props;
+    let { actions, songHistory, dashboard, history, musicSources } = this.props;
 
     return (
       <Dashboard
@@ -23,6 +23,7 @@ class DashboardContainer extends React.Component {
         loadTopTags={actions.loadTopTags}
         loadTopTracks={actions.loadTopTracks}
         dashboardData={dashboard}
+        songHistory={songHistory}
         history={history}
         addToQueue={actions.addToQueue}
         musicSources={this.props.musicSources}
@@ -36,6 +37,7 @@ class DashboardContainer extends React.Component {
 
 function mapStateToProps(state) {
   return {
+    songHistory: state.player.songHistory,
     dashboard: state.dashboard,
     musicSources: state.plugin.plugins.musicSources
   };

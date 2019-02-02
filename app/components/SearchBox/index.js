@@ -11,7 +11,7 @@ class SearchBox extends React.Component {
         <FontAwesome name='search'/>
         <div className='form'>
           <DebounceInput
-            placeholder='Search...'
+            placeholder='Search bitch...'
             minLength={2}
             debounceTimeout={500}
             onChange={this.props.handleSearch}

@@ -19,7 +19,8 @@ import {
 const initialState = {
   bestNewAlbums: [],
   bestNewTracks: [],
-  topTracks: []
+  topTracks: [],
+  songHistory:[],
 };
 
 export default function DashboardReducer(state = initialState, action) {

@@ -6,7 +6,9 @@ import {
   UPDATE_PLAYBACK_PROGRESS,
   UPDATE_SEEK,
   UPDATE_VOLUME,
-  UPDATE_PLAYBACK_STREAM_LOADING
+  UPDATE_PLAYBACK_STREAM_LOADING,
+  ASSIGN_LAST_SONG,
+  UPDATE_SONG_HISTORY,
 } from '../actions/player';
 
 import {
@@ -20,7 +22,9 @@ const initialState = {
   playbackStreamLoading: false,
   playbackProgress: 0,
   seek: 0,
-  volume: 100
+  volume: 100,
+  previousSong: 'None',
+  songHistory: []
 };
 
 export default function PlayerReducer(state=initialState, action) {
@@ -53,9 +57,17 @@ export default function PlayerReducer(state=initialState, action) {
       playbackProgress: 0,
       seek: 0
     });
+  case ASSIGN_LAST_SONG:
+    return Object.assign({}, state, {
+      previousSong: action.payload
+    });
   case UPDATE_PLAYBACK_STREAM_LOADING:
     return Object.assign({}, state, {
       playbackStreamLoading: action.payload
+    });
+  case UPDATE_SONG_HISTORY:
+    return Object.assign({}, state, {
+      songHistory: action.payload
     });
   default:
     return state;
