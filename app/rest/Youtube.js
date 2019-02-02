@@ -1,5 +1,7 @@
 import globals from '../globals';
-const ytlist = require('youtube-playlist');
+//const ytlist = require('youtube-playlist');
+const rp = require('request-promise');
+const $ = require('cheerio');
 const getArtistTitle = require('get-artist-title');
 const lastfm = require('./LastFm');
 
@@ -22,12 +24,50 @@ function isValidURL (str) {
   return pattern.test(str);
 }
 
+
+const tag = {
+	name: 'data-title',
+	url: 'data-video-id',
+	id: 'data-video-id'
+};
+
+const splitCurrentPlay = str => {
+	return str.indexOf('watch') === -1 ? str : `https://www.youtube.com/playlist?list=${str.split('&list=')[1].split('&t=')[0]}`;
+};
+
+const ytListSearch = (data, opt) => {
+  const url = 'https://youtube.com/watch?v=';
+	return rp(splitCurrentPlay(data)).then(res => { 
+    const thumb = $('tr', res);
+    
+		const arr = {playlist: []};
+
+		if (!opt) {
+			opt = Object.keys(tag);
+		}
+
+		const prefixUrl = (holder, marks) => holder === 'url' ? `${url}${marks}` : marks;
+
+		const multipleDetails = Array.isArray(opt);
+		arr.playlist = thumb.map((index, el) => {
+			if (multipleDetails) {
+				return opt.reduce((prev, holder) => {
+					prev[holder] = prefixUrl(holder, el.attribs[tag[holder]]);
+					return prev;
+				}, {});
+			}
+			return prefixUrl(opt, el.attribs[tag[opt]]);
+		}).get();
+
+		return {data: arr};
+	});
+};
+
 export function playlistSearch (url) {
   if (isValidURL(url)) {
-    return ytlist(url, 'name')
+
+    return ytListSearch(url, 'name')
       .then(res => {
-        console.log(url);
-        console.log(res);
         let allTracks = res.data.playlist.map((elt) => {
           let result = getArtistTitle(elt);
           if (result) {
